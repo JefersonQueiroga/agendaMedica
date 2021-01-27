@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -32,4 +33,3 @@ class PatientUpdate(UpdateView):
     form_class = PatientForm
     template_name = 'patient/update_form.html'
     success_url='/paciente/listar'
-
