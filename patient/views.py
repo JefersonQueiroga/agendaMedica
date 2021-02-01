@@ -31,5 +31,5 @@ class PatientList(ListView):
 class PatientUpdate(UpdateView):
     model = Patient
     form_class = PatientForm
-    template_name = 'patient/update_form.html'
+    template_name = 'patient/form.html'
     success_url='/paciente/listar'
