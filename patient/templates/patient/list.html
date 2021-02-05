@@ -46,16 +46,16 @@
                           #
                       </td>
                       <td>
-                          {{ patient.name }}
+                          {{ patient.nome }}
                       </td>
                       <td>
-                          {{ patient.city }}
+                          {{ patient.cidade }}
                       </td>
                       <td class="project_progress">
-                          {{ patient.dateBirth }}
+                          {{ patient.dataNascimento }}
                       </td>
                       <td class="project-state">
-                          {{ patient.phone }}
+                          {{ patient.telefone }}
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
@@ -68,10 +68,10 @@
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" href="#">
+                          <a class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir?')" href="{% url 'excluirPatient' patient.id %}">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              Excluir
                           </a>
                       </td>
                   </tr>

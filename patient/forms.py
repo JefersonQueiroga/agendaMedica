@@ -1,10 +1,10 @@
 
 from django.forms import ModelForm
-from .models import Patient
+from .models import Paciente
 
 class PatientForm(ModelForm):
     class Meta:
-        model = Patient
+        model = Paciente
         fields = '__all__'
 
 
