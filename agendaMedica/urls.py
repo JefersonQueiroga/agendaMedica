@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from core import urls as url_core
 from patient import urls as url_patient
-
+from accounts import urls as url_accounts
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(url_core)),
+    path('', include(url_accounts)),
     path('', include(url_patient)),
 
 ]
