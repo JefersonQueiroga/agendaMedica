@@ -53,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'global_login_required.GlobalLoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'agendaMedica.urls'
@@ -128,7 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 
-AUTH_USER_MODEL = "accounts.Usuario"
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'login'
+AUTH_USER_MODEL = "accounts.Usuario" # class that contains the settings
+LOGIN_REDIRECT_URL = 'index' # Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGOUT_REDIRECT_URL = 'login' # Redirect to login URL after logout/exit
 LOGIN_URL = 'login'
