@@ -31,7 +31,7 @@ class UsuarioManager(BaseUserManager):
             password=password,
             cpf=cpf
         )
-        user.is_admin = True
+        user.is_admin = 2
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)

@@ -7,28 +7,23 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from .models import Paciente
 from .forms import PatientForm
-from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-class PatientCreate(CreateView):
+class PatientCreate(LoginRequiredMixin,CreateView):
     model = Paciente
     fields = '__all__'
     template_name = 'patient/form.html'
-
-    def get_context_data(self, **kwargs):
-        data = super(PatientCreate, self).get_context_data(**kwargs)
-        return data
-
-    def get_success_url(self):
-        return reverse_lazy('listPatient')
+    success_url = 'listPatient'
 
 
-class PatientList(ListView):
+##@login_required don´t use in Class View
+class PatientList(LoginRequiredMixin, ListView):
     model = Paciente
     context_object_name = 'list_patient'  # your own name for the list as a template variable
     template_name = 'patient/list.html'  # Specify your own template name/location
 
-class PatientUpdate(UpdateView):
+
+class PatientUpdate(LoginRequiredMixin,UpdateView):
     ## implementacao da regra de negocio
     model = Paciente
     form_class = PatientForm
@@ -36,7 +31,7 @@ class PatientUpdate(UpdateView):
     success_url='/paciente/listar'
 
 
-class PatientDelete(DeleteView):
+class PatientDelete(LoginRequiredMixin,DeleteView):
     model = Paciente
     success_url=reverse_lazy('listPatient')
 
