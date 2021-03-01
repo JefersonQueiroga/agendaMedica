@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'schedule',
     'patient',
     'core',
+    'task',
 
 ]
 
@@ -139,3 +140,12 @@ AUTH_USER_MODEL = "accounts.Usuario" # class that contains the settings
 LOGIN_REDIRECT_URL = 'index' # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGOUT_REDIRECT_URL = 'login' # Redirect to login URL after logout/exit
 LOGIN_URL = 'login'
+
+
+# CELERY STUFF
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Sao_Paulo'
