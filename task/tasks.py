@@ -4,7 +4,7 @@ from celery.task import periodic_task
 from datetime import  datetime
 
 @shared_task
-def horario(hora):
+def horario():
     print("->>>>> Horário: ", datetime.now())
 
 

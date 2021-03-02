@@ -1,4 +1,5 @@
 {% extends 'adminlte/base.html' %}
+{% load permission_tags %}
 
 {% block content %}
      <!-- Main content -->
@@ -68,11 +69,14 @@
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir?')" href="{% url 'excluirPatient' patient.id %}">
-                              <i class="fas fa-trash">
-                              </i>
-                              Excluir
-                          </a>
+
+                          {% if user|has_role:'medica' %}
+                              <a class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir?')" href="{% url 'excluirPatient' patient.id %}">
+                                  <i class="fas fa-trash">
+                                  </i>
+                                  Excluir
+                              </a>
+                          {% endif %}
                       </td>
                   </tr>
                 {% endfor %}

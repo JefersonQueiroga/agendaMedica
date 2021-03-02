@@ -1,7 +1,8 @@
 from django.conf import settings
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractUser
-from django.core.validators import MaxValueValidator, RegexValidator
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractUser,PermissionsMixin
+from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models import Q
 
 
 class UsuarioManager(BaseUserManager):
@@ -38,7 +39,8 @@ class UsuarioManager(BaseUserManager):
         return user
 
 
-class Usuario(AbstractBaseUser):
+
+class Usuario(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(unique=True, max_length=100, db_index=True)
     username = models.CharField(max_length=30, unique=True, help_text="Username",blank=True)
     telefone=models.CharField(max_length=14, null=True, blank=True, help_text="Phone number", validators=[
@@ -46,7 +48,6 @@ class Usuario(AbstractBaseUser):
     dataNascimento = models.DateField(null=True)
     cpf = models.CharField(max_length=30)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True,null=True)
-
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -58,7 +59,7 @@ class Usuario(AbstractBaseUser):
     objects = UsuarioManager()
 
     def __str__(self):
-        return self.email
+        return str(self.id) +" - " + self.email
 
     def has_perm(self, perm, obj=None):
         return self.is_admin

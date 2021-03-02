@@ -8,6 +8,8 @@ from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from .models import Paciente
 from .forms import PatientForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rolepermissions.mixins import HasRoleMixin
+from django.conf import settings
 
 class PatientCreate(LoginRequiredMixin,CreateView):
     model = Paciente
@@ -31,11 +33,10 @@ class PatientUpdate(LoginRequiredMixin,UpdateView):
     success_url='/paciente/listar'
 
 
-class PatientDelete(LoginRequiredMixin,DeleteView):
+class PatientDelete(LoginRequiredMixin,HasRoleMixin,DeleteView):
     model = Paciente
     success_url=reverse_lazy('listPatient')
+    allowed_roles = 'medico'
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-
-
