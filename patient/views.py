@@ -10,12 +10,14 @@ from .forms import PatientForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rolepermissions.mixins import HasRoleMixin
 from django.conf import settings
+from mail_templated import EmailMessage
+
 
 class PatientCreate(LoginRequiredMixin,CreateView):
     model = Paciente
     fields = '__all__'
     template_name = 'patient/form.html'
-    success_url = 'listPatient'
+    success_url='/paciente/listar'
 
 
 ##@login_required don´t use in Class View

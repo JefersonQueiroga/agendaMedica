@@ -1,0 +1,19 @@
+{% extends "mail_templated/base.tpl" %}
+
+
+{% block subject %}
+    {{ usuario.nome }}, bem-vindo(a) ao Sistema de Agendamento Médico
+{% endblock %}
+
+{% block html %}
+    <br>
+    <h2>Sistema de Agendamento Médico</h2>
+    <p>{{ usuario.nome }}, Bem-vindo ao nosso sistema!</p>
+    <p>Qualquer dúvida entrar em contato pelo número: (84) 3351-2543</p>
+
+    <br>
+    <p>***** MENSAGEM GERADA AUTOMATICAMENTE. NÃO RESPONDA. *****</p>
+    <br>
+    <hr>
+    <p><small>Desenvolvido pelo Disciplina de Desenvolvimento de Sistemas Corporativos</small></p>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from task.tasks import enviarEmailCadastro
 
 class Paciente(models.Model):
     nome = models.CharField(max_length=250)
@@ -13,8 +14,16 @@ class Paciente(models.Model):
     def __str__(self):
         return self.nome
 
+    def save(self, *args, **kwargs):
+        if not self.pk :
+            enviarEmailCadastro.delay(self.nome,self.email )
+            super(Paciente, self).save(*args, **kwargs)
+
+
+
     class Meta:
         verbose_name="Paciente"
+
 
 class Exame(models.Model):
     name = models.TextField()

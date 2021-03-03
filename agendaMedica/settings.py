@@ -33,14 +33,16 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'adminlte3',
     'rolepermissions',
+    'mail_templated', #template de e-mail
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
+
     'accounts',
     'schedule',
     'patient',
@@ -154,3 +156,10 @@ CELERY_TIMEZONE = 'America/Sao_Paulo'
 
 ROLEPERMISSIONS_MODULE = 'agendaMedica.roles'
 ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
+
+
+#configurações do E-mail
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '5fd32954419b28'
+EMAIL_HOST_PASSWORD = 'f51e547acd0e43'
+EMAIL_PORT = '2525'

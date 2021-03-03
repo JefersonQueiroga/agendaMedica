@@ -5,14 +5,14 @@ from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'agendaMedica.settings')
-app = Celery('agendaMedica')
+app = Celery('agendaMedica',broker='redis://localhost:6379/0')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
-from task.tasks import horario
+from task.tasks import enviarEmailCadastro
 
 
 
@@ -22,11 +22,6 @@ from task.tasks import horario
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
-
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    sender.add_periodic_task(10, horario, name='horario')
 
 
 app.conf.timezone = 'UTC'
